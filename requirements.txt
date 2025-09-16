@@ -1,0 +1,12 @@
+Django==5.2.6
+djangorestframework==3.16.1
+drf-yasg==1.21.10
+gunicorn==23.0.0
+psycopg2-binary==2.9.10
+dj-database-url==3.0.1
+openmeteo_requests==1.7.2
+pandas==2.3.2
+numpy==2.3.3
+requests-cache==1.2.1
+retry-requests==2.0.0
+whitenoise==6.10.0

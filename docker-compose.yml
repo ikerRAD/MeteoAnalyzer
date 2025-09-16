@@ -1,0 +1,29 @@
+services:
+  database:
+    image: postgres:15
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-database}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-database}
+      POSTGRES_DB: ${POSTGRES_DB:-database}
+    volumes:
+      - database_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+
+  backend:
+    build: .
+    depends_on:
+      - database
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-database}:${POSTGRES_PASSWORD:-database}@database:5432/${POSTGRES_DB:-database}"
+    volumes:
+      - .:/app
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+
+volumes:
+  database_data:
