@@ -1,0 +1,2 @@
+from core.infrastructure.persistence.models.django_city import DjangoCity
+from core.infrastructure.persistence.models.django_weather_data import DjangoWeatherData
