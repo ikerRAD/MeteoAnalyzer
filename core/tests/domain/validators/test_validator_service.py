@@ -36,7 +36,7 @@ class TestValidatorService(TestCase):
             self.valid_latitude,
             self.valid_longitude,
             self.valid_upper,
-            self.valid_lower
+            self.valid_lower,
         )
 
         self.assertEqual("New York", result.city_name)
@@ -55,7 +55,7 @@ class TestValidatorService(TestCase):
             None,
             None,
             None,
-            None
+            None,
         )
 
         self.assertEqual("New York", result.city_name)
@@ -66,176 +66,181 @@ class TestValidatorService(TestCase):
         self.assertEqual(30, result.upper_threshold)
         self.assertEqual(0, result.lower_threshold)
 
-
     def test_validate_params_without_name(self):
-        with self.assertRaisesRegex(ValidationError, "Mandatory field city_name cannot be None"):
+        with self.assertRaisesRegex(
+            ValidationError, "Mandatory field city_name cannot be None"
+        ):
             ValidatorService.validate_params(
-            None,
-            self.valid_start_date,
-            self.valid_end_date,
-            None,
-            None,
-            None,
-            None
+                None, self.valid_start_date, self.valid_end_date, None, None, None, None
             )
-
 
     def test_validate_params_without_start_date(self):
-        with self.assertRaisesRegex(ValidationError, "Mandatory field start_date cannot be None"):
+        with self.assertRaisesRegex(
+            ValidationError, "Mandatory field start_date cannot be None"
+        ):
             ValidatorService.validate_params(
-            "New York",
-            None,
-            self.valid_end_date,
-            None,
-            None,
-            None,
-            None
+                "New York", None, self.valid_end_date, None, None, None, None
             )
-
 
     def test_validate_params_without_end_date(self):
-        with self.assertRaisesRegex(ValidationError, "Mandatory field end_date cannot be None"):
+        with self.assertRaisesRegex(
+            ValidationError, "Mandatory field end_date cannot be None"
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            None,
-            None,
-            None,
-            None,
-            None
+                "New York", self.valid_start_date, None, None, None, None, None
             )
-
 
     def test_validate_params_with_invalid_start_date(self):
-        with self.assertRaisesRegex(ValidationError, f"Invalid format for start_date: {self.invalid_start_date}"):
+        with self.assertRaisesRegex(
+            ValidationError, f"Invalid format for start_date: {self.invalid_start_date}"
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.invalid_start_date,
-            self.valid_end_date,
-            None,
-            None,
-            None,
-            None
+                "New York",
+                self.invalid_start_date,
+                self.valid_end_date,
+                None,
+                None,
+                None,
+                None,
             )
 
-
     def test_validate_params_with_invalid_end_date(self):
-        with self.assertRaisesRegex(ValidationError, f"Invalid format for end_date: {self.invalid_end_date}"):
+        with self.assertRaisesRegex(
+            ValidationError, f"Invalid format for end_date: {self.invalid_end_date}"
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.invalid_end_date,
-            None,
-            None,
-            None,
-            None
+                "New York",
+                self.valid_start_date,
+                self.invalid_end_date,
+                None,
+                None,
+                None,
+                None,
             )
 
     def test_validate_params_with_invalid_latitude(self):
-        with self.assertRaisesRegex(ValidationError, f"Invalid format for latitude: {self.invalid_latitude}"):
+        with self.assertRaisesRegex(
+            ValidationError, f"Invalid format for latitude: {self.invalid_latitude}"
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.valid_end_date,
-            self.invalid_latitude,
-            None,
-            None,
-            None
+                "New York",
+                self.valid_start_date,
+                self.valid_end_date,
+                self.invalid_latitude,
+                None,
+                None,
+                None,
             )
 
     def test_validate_params_with_invalid_longitude(self):
-        with self.assertRaisesRegex(ValidationError, f"Invalid format for longitude: {self.invalid_longitude}"):
+        with self.assertRaisesRegex(
+            ValidationError, f"Invalid format for longitude: {self.invalid_longitude}"
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.valid_end_date,
-            self.valid_latitude,
-            self.invalid_longitude,
-            None,
-            None
+                "New York",
+                self.valid_start_date,
+                self.valid_end_date,
+                self.valid_latitude,
+                self.invalid_longitude,
+                None,
+                None,
             )
 
     def test_validate_params_with_invalid_upper(self):
-        with self.assertRaisesRegex(ValidationError, f"Invalid format for upper_threshold: {self.invalid_upper}"):
+        with self.assertRaisesRegex(
+            ValidationError, f"Invalid format for upper_threshold: {self.invalid_upper}"
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.valid_end_date,
-            self.valid_latitude,
-            self.valid_longitude,
-            self.invalid_upper,
-            None
+                "New York",
+                self.valid_start_date,
+                self.valid_end_date,
+                self.valid_latitude,
+                self.valid_longitude,
+                self.invalid_upper,
+                None,
             )
 
     def test_validate_params_with_invalid_lower(self):
-        with self.assertRaisesRegex(ValidationError, f"Invalid format for lower_threshold: {self.invalid_lower}"):
+        with self.assertRaisesRegex(
+            ValidationError, f"Invalid format for lower_threshold: {self.invalid_lower}"
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.valid_end_date,
-            self.valid_latitude,
-            self.valid_longitude,
-            self.valid_upper,
-            self.invalid_lower,
+                "New York",
+                self.valid_start_date,
+                self.valid_end_date,
+                self.valid_latitude,
+                self.valid_longitude,
+                self.valid_upper,
+                self.invalid_lower,
             )
 
-
     def test_validate_params_with_start_date_out_of_bounds(self):
-        with self.assertRaisesRegex(ValidationError, f"start_date {self.valid_end_date} is greater than {self.valid_start_date}."):
+        with self.assertRaisesRegex(
+            ValidationError,
+            f"start_date {self.valid_end_date} is greater than {self.valid_start_date}.",
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_end_date,
-            self.valid_start_date,
-            None,
-            None,
-            None,
-            None
+                "New York",
+                self.valid_end_date,
+                self.valid_start_date,
+                None,
+                None,
+                None,
+                None,
             )
 
     def test_validate_params_with_latitude_out_of_bounds_upper(self):
-        with self.assertRaisesRegex(ValidationError, "latitude 500.0 is greater than 90."):
+        with self.assertRaisesRegex(
+            ValidationError, "latitude 500.0 is greater than 90."
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.valid_end_date,
-            "500.0",
-            None,
-            None,
-            None
+                "New York",
+                self.valid_start_date,
+                self.valid_end_date,
+                "500.0",
+                None,
+                None,
+                None,
             )
 
     def test_validate_params_with_latitude_out_of_bounds_lower(self):
-        with self.assertRaisesRegex(ValidationError, "latitude -500.0 is lower than -90."):
+        with self.assertRaisesRegex(
+            ValidationError, "latitude -500.0 is lower than -90."
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.valid_end_date,
-            "-500.0",
-            None,
-            None,
-            None
+                "New York",
+                self.valid_start_date,
+                self.valid_end_date,
+                "-500.0",
+                None,
+                None,
+                None,
             )
 
     def test_validate_params_with_longitude_out_of_bounds_upper(self):
-        with self.assertRaisesRegex(ValidationError, "longitude 500.0 is greater than 180."):
+        with self.assertRaisesRegex(
+            ValidationError, "longitude 500.0 is greater than 180."
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.valid_end_date,
-            self.valid_latitude,
-            "500.0",
-            None,
-            None
+                "New York",
+                self.valid_start_date,
+                self.valid_end_date,
+                self.valid_latitude,
+                "500.0",
+                None,
+                None,
             )
 
     def test_validate_params_with_longitude_out_of_bounds_lower(self):
-        with self.assertRaisesRegex(ValidationError, "longitude -500.0 is lower than -180."):
+        with self.assertRaisesRegex(
+            ValidationError, "longitude -500.0 is lower than -180."
+        ):
             ValidatorService.validate_params(
-            "New York",
-            self.valid_start_date,
-            self.valid_end_date,
-            self.valid_latitude,
-            "-500.0",
-            None,
-            None
+                "New York",
+                self.valid_start_date,
+                self.valid_end_date,
+                self.valid_latitude,
+                "-500.0",
+                None,
+                None,
             )
