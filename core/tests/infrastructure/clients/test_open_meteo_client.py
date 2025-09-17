@@ -89,8 +89,11 @@ class TestOpenMeteoClient(TestCase):
         self.assertEqual(len(weather_data), 2)
         self.assertEqual(
             WeatherData(
-                test_city,
-                date_time=pd.to_datetime("2025-01-01T00:00").tz_localize("UTC").tz_convert("Europe/Madrid").to_pydatetime(),
+                test_city.id,
+                date_time=pd.to_datetime("2025-01-01T00:00")
+                .tz_localize("UTC")
+                .tz_convert("Europe/Madrid")
+                .to_pydatetime(),
                 precipitation=0.1,
                 temperature=15.5,
             ),
@@ -98,8 +101,11 @@ class TestOpenMeteoClient(TestCase):
         )
         self.assertEqual(
             WeatherData(
-                test_city,
-                date_time=pd.to_datetime("2025-01-01T01:00").tz_localize("UTC").tz_convert("Europe/Madrid").to_pydatetime(),
+                test_city.id,
+                date_time=pd.to_datetime("2025-01-01T01:00")
+                .tz_localize("UTC")
+                .tz_convert("Europe/Madrid")
+                .to_pydatetime(),
                 precipitation=0.2,
                 temperature=16.0,
             ),

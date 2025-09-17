@@ -55,10 +55,10 @@ if PAGE_SIZE:
         },
     }
 
-
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {},
     "USE_SESSION_AUTH": False,
+    "DEFAULT_AUTO_TAGS": False,
 }
 
 

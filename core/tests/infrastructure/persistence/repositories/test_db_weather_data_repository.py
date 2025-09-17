@@ -26,13 +26,13 @@ class TestIntegrationDbWeatherDataRepository(TestCase):
 
         domain_weather_data_list = [
             WeatherData(
-                city=city.to_domain(),
+                city_id=city.id,
                 date_time=datetime(2010, 1, 1, tzinfo=timezone.utc),
                 precipitation=1.0,
                 temperature=30.0,
             ),
             WeatherData(
-                city=city.to_domain(),
+                city_id=city.id,
                 date_time=datetime(2010, 1, 2, tzinfo=timezone.utc),
                 precipitation=2.0,
                 temperature=31.0,
@@ -71,13 +71,13 @@ class TestIntegrationDbWeatherDataRepository(TestCase):
 
         domain_weather_data_list = [
             WeatherData(
-                city=city.to_domain(),
+                city_id=city.id,
                 date_time=datetime(2010, 1, 1, tzinfo=timezone.utc),
                 precipitation=1.0,
                 temperature=30.0,
             ),
             WeatherData(
-                city=city.to_domain(),
+                city_id=city.id,
                 date_time=datetime(2010, 1, 2, tzinfo=timezone.utc),
                 precipitation=2.0,
                 temperature=31.0,

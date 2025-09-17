@@ -60,7 +60,7 @@ class OpenMeteoClient(MeteoClient):
                 date_time=row.time.to_pydatetime(),
                 precipitation=row.precipitation,
                 temperature=row.temperature_2m,
-                city=city,
+                city_id=city.id,
             ),
             axis=1,
         ).to_list()
