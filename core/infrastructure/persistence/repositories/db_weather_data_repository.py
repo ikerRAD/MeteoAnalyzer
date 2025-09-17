@@ -7,14 +7,12 @@ class DbWeatherDataRepository(WeatherDataRepository):
     def __init__(self):
         self.__django_weather_data_manager = DjangoWeatherData.objects
 
-    def bulk_save(self, weather_data_list: list[WeatherData]) -> list[WeatherData]:
+    def bulk_save(self, weather_data_list: list[WeatherData]) -> None:
         django_weather_data_list = [
             DjangoWeatherData.from_domain(weather_data)
             for weather_data in weather_data_list
         ]
 
-        saved_instances = self.__django_weather_data_manager.bulk_create(
-            django_weather_data_list
+        self.__django_weather_data_manager.bulk_create(
+            django_weather_data_list, ignore_conflicts=True
         )
-
-        return [instance.to_domain() for instance in saved_instances]

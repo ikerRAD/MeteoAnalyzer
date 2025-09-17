@@ -18,6 +18,7 @@ class DjangoCity(models.Model):
         db_table = "cities"
         verbose_name = "city"
         verbose_name_plural = "cities"
+        unique_together = ("name", "latitude", "longitude")
 
     def __str__(self):
         return f"{self.name}, [latitude: {self.latitude}, longitude: {self.longitude}]"
