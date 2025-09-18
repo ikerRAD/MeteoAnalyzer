@@ -1,4 +1,4 @@
 from core.infrastructure.persistence.models.django_city import DjangoCity  # noqa: F401
-from core.infrastructure.persistence.models.django_weather_data import (
+from core.infrastructure.persistence.models.django_weather_data import (  # noqa: F401
     DjangoWeatherData,
-)  # noqa: F401
+)

@@ -43,7 +43,7 @@ ROOT_URLCONF = "MeteoAnalyzer.urls"
 
 REST_FRAMEWORK = {}
 
-PAGE_SIZE = os.getenv("PAGE_SIZE", 10)
+PAGE_SIZE = os.getenv("PAGE_SIZE", None)
 
 if PAGE_SIZE:
     PAGE_SIZE = int(PAGE_SIZE)

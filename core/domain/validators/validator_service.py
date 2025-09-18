@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from core.domain.models.stats_query import StatsQuery
 from core.domain.validators.date_format_validator import DateFormatValidator
 from core.domain.validators.float_format_validator import FloatFormatValidator
