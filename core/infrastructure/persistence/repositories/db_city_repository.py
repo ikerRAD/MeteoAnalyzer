@@ -1,4 +1,5 @@
 from django.db import IntegrityError, transaction
+from django.db.models import Q
 
 from core.domain.exceptions.city_already_exists_exception import (
     CityAlreadyExistsException,
@@ -19,5 +20,28 @@ class DbCityRepository(CityRepository):
                 django_city.save()
                 return django_city.to_domain()
         except IntegrityError:
-            saved_django_city = self.__django_city_manager.get(latitude=city.latitude, longitude=city.longitude, name=city.name)
+            saved_django_city = self.__django_city_manager.get(
+                latitude=city.latitude, longitude=city.longitude, name=city.name
+            )
             raise CityAlreadyExistsException(saved_django_city.id)
+
+    def get_cities_by_match(
+        self, name: str, latitude: float | None, longitude: float | None
+    ) -> list[City]:
+        query = Q(name__iexact=name)
+
+        if latitude is not None:
+            query = query & Q(latitude=latitude)
+
+        if longitude is not None:
+            query = query & Q(longitude=longitude)
+
+        return [
+            django_city.to_domain()
+            for django_city in self.__django_city_manager.filter(query)
+        ]
+
+    def get_all_cities(self) -> list[City]:
+        return [
+            django_city.to_domain() for django_city in self.__django_city_manager.all()
+        ]
