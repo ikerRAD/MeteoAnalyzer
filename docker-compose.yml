@@ -20,8 +20,6 @@ services:
       - .env
     environment:
       DATABASE_URL: "postgresql://${POSTGRES_USER:-database}:${POSTGRES_PASSWORD:-database}@database:5432/${POSTGRES_DB:-database}"
-    volumes:
-      - .:/app
     ports:
       - "${BACKEND_PORT:-8000}:8000"
 
