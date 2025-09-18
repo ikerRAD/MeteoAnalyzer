@@ -15,7 +15,6 @@ from core.infrastructure.views.validations.validate_stats_query import (
 )
 
 
-
 class DummyView(APIView):
     @validate_stats_query
     def get(self, _, stats_query: StatsQuery):
